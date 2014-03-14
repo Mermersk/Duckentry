@@ -4,7 +4,7 @@ function flipihlada()
     flipi = love.graphics.newImage("flipi.png")
 	kassi = love.graphics.newImage("kassi.png")
 	flipi_x = 200    
-	flipi_y = 249
+	flipi_y = 240
 	paused_text = "Start"
 	paused = true
 

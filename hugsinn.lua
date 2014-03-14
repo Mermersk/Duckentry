@@ -36,8 +36,8 @@ function hugs(start, hvelengi, mynd) --function til að auðvelda teikningu hugs
 	end
 	
 	if start < timer and start + hvelengi + 2 > timer then --Annars teiknar hún bara allar hugsanir samtímis! + 2 þýðir að animationið fær 2 sek til að hverfa(alpha að lækka)
-	    love.graphics.setColor(255, 255, 255, alpha)
-		love.graphics.draw(mynd, ond_x + 40, ond_y - 120, 0, 0.4, 0.4)
+	    love.graphics.setColor(211, 211, 211, alpha)
+		love.graphics.draw(mynd, ond_x + 40, mynd_y, 0, 0.4, 0.4)
 		love.graphics.setColor(255, 255, 255, 255)
 	end
 	
@@ -47,6 +47,12 @@ function hugs(start, hvelengi, mynd) --function til að auðvelda teikningu hugs
 	
 	if start < timer and start + 0.5 > timer then
 	    --love.audio.play(quack1)
+	end
+	
+	if ond_y - 120 > 0 then  --svo að myndin/hugsunin fari ekki út af skjánum þegar öndin er lengst uppi.
+	    mynd_y = ond_y - 120
+	else
+	    mynd_y = 0
 	end
 
 end

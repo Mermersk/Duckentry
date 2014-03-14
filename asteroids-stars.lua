@@ -13,6 +13,9 @@ function asteroidshlada()
 	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
 	{ast_x = 820, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
 	}
+	asteroid_scale_x = 0.1
+	asteroid_scale_y = 0.1
+	
 	
 	asteroid2 = love.graphics.newImage("ast2.png")
 	aster2 = {
@@ -85,11 +88,11 @@ function asteroidsdraw()
 
     for lykill, gildi in pairs(aster) do
 	   -- love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
-	    love.graphics.draw(asteroid, gildi.ast_x, gildi.ast_y, gildi.ast_start, 0.1, 0.1, 150, 150)
+	    love.graphics.draw(asteroid, gildi.ast_x, gildi.ast_y, gildi.ast_start, asteroid_scale_x, asteroid_scale_y, 150, 150)
 	end
 	for lykill, gildi in pairs(aster2) do
 	   -- love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
-	    love.graphics.draw(asteroid2, gildi.ast_x, gildi.ast_y, gildi.ast_start, 0.1, 0.1, 150, 150)
+	    love.graphics.draw(asteroid2, gildi.ast_x, gildi.ast_y, gildi.ast_start, asteroid_scale_x, asteroid_scale_y, 150, 150)
 	end
 	
 -------------------------------------------------------------------------------------------------------------------------------------
