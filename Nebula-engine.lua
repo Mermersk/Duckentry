@@ -1,9 +1,9 @@
 
 function nebulahlada()
     nebulas = {
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 775), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 800), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 750), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 37), rammi_scale = love.math.random(5, 12)/10}
+	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(500, 600), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
+	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(500, 620), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
+	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(500, 580), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 37), rammi_scale = love.math.random(5, 12)/10}
 	
 	}
 	
@@ -17,7 +17,7 @@ function nebulaupdate(dt)
         gildi.rammi_x = gildi.rammi_x - gildi.rammi_speed*dt
 		
 		if gildi.rammi_x < -450 then
-		    gildi.rammi_x = love.math.random(550, 950)
+		    gildi.rammi_x = love.math.random(550, 680)
             gildi.rammi_y = love.math.random(-250, 175)
             gildi.rammi_speed = love.math.random(15, 30)
             gildi.nebulat = nebula(love.math.random(14, 30))

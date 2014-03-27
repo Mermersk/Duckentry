@@ -21,9 +21,9 @@ function hugsdraw()
 	--	end
 	--end
 	
-	hugs(10, 10, hugs1) --functionið sem tekur við upplýsingum!
-	hugs(25, 10, hugs2)
-	hugs(45, 10, hugs3)
+	--hugs(10, 10, hugs1) --functionið sem tekur við upplýsingum!
+	hugs(30, 10, hugs2)
+	hugs(70, 10, hugs3)
 end
 
 function hugs(start, hvelengi, mynd) --function til að auðvelda teikningu hugsanna, hvenær í leiknum það á að gerast
@@ -46,7 +46,8 @@ function hugs(start, hvelengi, mynd) --function til að auðvelda teikningu hugs
 	end
 	
 	if start < timer and start + 0.5 > timer then
-	    --love.audio.play(quack1)
+	    kakk:setLooping(false)
+	    love.audio.play(kakk)
 	end
 	
 	if ond_y - 120 > 0 then  --svo að myndin/hugsunin fari ekki út af skjánum þegar öndin er lengst uppi.

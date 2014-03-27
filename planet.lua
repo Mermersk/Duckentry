@@ -20,9 +20,13 @@ end
 	
 function planetteikna()
 
-    if timer > 2 then
+    if timer > 100 then  --Hér stilli ég hvenær plánetan kemur og allt það byrjar.
 	    love.graphics.draw(planetan, planet_x, planet_y)  --Hér teikna ég svo canvasinn, en það er ekki kröfuhörð aðgerð þar sem að allt hefur verið reiknað í planethlada(), ef ég setti functionið bara beint hérna inn í love.draw þá væri hann alltaf að reikna endalaust = mikið lagg
 		planet_move = true
+	end
+	
+	if utmork_planetu > 2700 and utmork_planetu < 2850 then
+	    love.graphics.print("GRAVITY!", 200, 200)
 	end
 
 end	

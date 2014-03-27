@@ -8,10 +8,10 @@ function asteroidshlada()
 
     asteroid = love.graphics.newImage("ast.png")
 	aster = {
-	{ast_x = 750, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 750, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 820, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1570, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1650, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
 	}
 	asteroid_scale_x = 0.1
 	asteroid_scale_y = 0.1
@@ -19,10 +19,10 @@ function asteroidshlada()
 	
 	asteroid2 = love.graphics.newImage("ast2.png")
 	aster2 = {
-	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 769, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 790, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1550, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1650, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
 	}
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +80,10 @@ function asteroidsupdate(dt)
 		    gildi.xhnit = 482
 			gildi.yhnit = love.math.random(0, 320)
 		end
+		
+		if utmork_planetu < 2500 and gildi.a > 5 then  --Svo að stjörnurnar sjást ekki í gegnum plánetuna
+		    gildi.a = gildi.a - 10*dt
+		end
 	end	
 
 end
@@ -87,12 +91,12 @@ end
 function asteroidsdraw()
 
     for lykill, gildi in pairs(aster) do
-	   -- love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
 	    love.graphics.draw(asteroid, gildi.ast_x, gildi.ast_y, gildi.ast_start, asteroid_scale_x, asteroid_scale_y, 150, 150)
+		love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
 	end
 	for lykill, gildi in pairs(aster2) do
-	   -- love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
 	    love.graphics.draw(asteroid2, gildi.ast_x, gildi.ast_y, gildi.ast_start, asteroid_scale_x, asteroid_scale_y, 150, 150)
+		love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
 	end
 	
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +109,7 @@ function asteroidsdraw()
 
 end
 
-function asteroids_must_run_independent_from_state_of_boolean_reset(dt)
+function things_that_must_run_independent_from_state_of_boolean_reset(dt)
 
     if reset == true then --Resetta asteroids aftur svo að splandi hafi tima til að ná áttum.
 	    
@@ -119,6 +123,7 @@ function asteroids_must_run_independent_from_state_of_boolean_reset(dt)
 		reset = false
     end
 
+	utmork_planetu = math.sqrt(((planet_x + 2500) - ond_x) * ((planet_x + 2500) - ond_x) + ((planet_y + 2500) - ond_y) * ((planet_y + 2500) - ond_y))
 end
 
 

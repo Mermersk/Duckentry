@@ -44,50 +44,7 @@ function flipiaction()
 	
 	if lifteljari == 3 and love.mouse.isDown("l") and mx > 180 and mx < 300 and my > 100 and my < 160 then --Resetta functionið, hér byrjar leikurinn uppá nýtt
 	    --GAME OVER SCHUUUULBOY, BYRJA UPPÁ NÝTT
-	
-		
-		aster = {
-	{ast_x = 750, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 750, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 820, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
-	}
-	
-	    aster2 = {
-	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 800, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 769, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 790, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
-	}
-	
-	nebulas = {
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 775), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 800), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 750), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 37), rammi_scale = love.math.random(5, 12)/10}
-	}
-	
-	    	
-		ond_x = 75
-        ond_y = 150
-	    ond_rot = 3.14
-	    ond_speed = 20
-	
-		timer = 0
-		flipihlada()
-	    hugshlada()
-		reset = false
-		
-		snu = 0
-	    snu2 = 0
-		
-		planet_move = false
-	    planet_x = 3700
-	    planet_y = 3000
-		
-		lifteljari = 0
-		hugs(10, 10, hugs1) 
-	    hugs(25, 10, hugs2)
-	    hugs(45, 10, hugs3)
+	    resetgame()
 	end
 
 
@@ -101,10 +58,20 @@ function flipiaction()
 	love.graphics.draw(kassi, flipi_x - 175, flipi_y - 360)   --love.graphics.rectangle("fill", flipi_x - 175, flipi_y - 360, 430, 350)
 	love.graphics.setColor(255, 255, 255, 255)
 	
-	love.graphics.setColor(100, 1, 1)
-	love.graphics.rectangle("fill", flipi_x + 50, flipi_y - 270, 180, 100)                                      --flipi_x + 100, flipi_y - 145, 75, 35)
+	love.graphics.setColor(100, 1, 1)                --Þessi kóðaklasi teiknar QUIT takkan
+	love.graphics.rectangle("fill", flipi_x + 50, flipi_y - 270, 180, 100)            
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.print("QUIT", flipi_x + 115, flipi_y - 233)
+	love.graphics.print("QUIT", flipi_x + 115, flipi_y - 233)  
+	
+	love.graphics.setColor(167, 120, 115)                --Teikna RESTART takkann
+	love.graphics.rectangle("fill", flipi_x - 140, flipi_y - 270, 180, 100)                                      --flipi_x + 100, flipi_y - 145, 75, 35)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.print("RESTART", flipi_x - 90, flipi_y - 233)
+	
+	love.graphics.setColor(167, 120, 115)                --Teikna CREDITS takkann
+	love.graphics.rectangle("fill", flipi_x - 20, flipi_y - 165, 140, 60)                                      --flipi_x + 100, flipi_y - 145, 75, 35)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.print("ABOUT", flipi_x + 15, flipi_y - 155)
 	
 	--love.graphics.setColor(167, 120, 115)
 	--love.graphics.rectangle("fill", flipi_x - 150, flipi_y - 270, 180, 100)
@@ -166,13 +133,65 @@ function flipiaction()
             love.graphics.draw(lif, 250, 140, 0, 0.3, 0.3)
 		    love.graphics.setColor(255, 255, 255, 255)			
 	    end
-		
+	 
 	else
 	  
 	end	
 	
+
+	
 end
 
+function resetgame()  --functionið sem að Restartar leiknum svo að spilandi getur byrjað alveg uppá nýtt.
+
+    aster = {
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1570, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1650, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
+	}
+	asteroid_scale_x = 0.1
+	asteroid_scale_y = 0.1
+	
+	aster2 = {
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1550, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
+	{ast_x = 1650, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
+	}
+	
+	nebulas = {
+	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 775), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
+	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 800), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
+	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 750), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 37), rammi_scale = love.math.random(5, 12)/10}
+	}
+	
+	    gul:reset()
+		
+		ond_x = 75
+        ond_y = 150
+	    ond_rot = 3.14
+	    ond_speed = 20
+	
+		timer = 0
+		flipihlada()
+	    hugshlada()
+		reset = false
+		
+		snu = 0
+	    snu2 = 0
+		
+		planet_move = false
+	    planet_x = 3700
+	    planet_y = 3000
+		
+		lifteljari = 0
+		--hugs(10, 10, hugs1) 
+	    hugs(25, 10, hugs2)
+	    hugs(45, 10, hugs3)
+        planethlada()
+
+end
 
 
     
