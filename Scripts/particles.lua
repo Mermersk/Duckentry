@@ -2,7 +2,7 @@
 
 
 function particlehlada()
-    gulm = love.graphics.newImage("gul.png")
+    gulm = love.graphics.newImage("Resources/gul.png")
  
     timerast = 0
     rot = 0
@@ -55,6 +55,7 @@ function particleupdate(dt)
 		
 		if gildi.ast_x > 500 and asteroid_scale_x < 0.08 then  --svo að loftsteinarnir hætta að koma, þegar inn í plánetuna er komið.
 	        gildi.ast_speed = 0
+			gul:stop()
 		end
 		
 	end

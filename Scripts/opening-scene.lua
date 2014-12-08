@@ -33,6 +33,7 @@ function opening_draw()
 	    for lykill, gildi in pairs(zzz) do
 	        if timer > gildi.timi then  --timi í töflunni er að hvert {x.....} teiknast í röð, timi er frá 1 til 5 svo nýr "z" bókstafur birtist hverja sekúndu
 	            love.graphics.setColor(gildi.r, gildi.g, gildi.b, alpha_opening)
+				love.graphics.setFont(font2)
                 love.graphics.print("ZZZ?", gildi.x, ond_y + gildi.y, gildi.rot)
 	            love.graphics.setColor(255, 255, 255)
 	        end

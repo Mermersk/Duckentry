@@ -16,9 +16,9 @@ function nebulaupdate(dt)
     for lykill, gildi in pairs(nebulas) do
         gildi.rammi_x = gildi.rammi_x - gildi.rammi_speed*dt
 		
-		if gildi.rammi_x < -450 then
-		    gildi.rammi_x = love.math.random(550, 680)
-            gildi.rammi_y = love.math.random(-250, 175)
+		if gildi.rammi_x < -400 then
+		    gildi.rammi_x = love.math.random(500, 560)
+            gildi.rammi_y = love.math.random(-200, 140)
             gildi.rammi_speed = love.math.random(15, 30)
             gildi.nebulat = nebula(love.math.random(14, 30))
 			gildi.rammi_scale = love.math.random(5, 12)/10

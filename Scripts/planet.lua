@@ -5,28 +5,33 @@ function planethlada()
 	--planet_x = 3700
 	--planet_y = 3000
 	planet(30, 125, 80, 2.667) --Hér hleð ég inn plánetuna í load svo að allt laggi ekki.
-	planet_x = 200  --og þá er auðvelt að hefja re-entry.
-	planet_y = 200
+	planet_x = 2000  --stærri stala hér = lengri timi til að plánetan komi
+	planet_y = 2000  --  sama og uppi
 end
 
 function planetupdate(dt)
 
 	if planet_move == true and planet_x > -2300 then  --planet_x > -2800 svo að plánetans stoppi eimmit í miðjunni á hringnum, kominn inn í lofthjúpinn!
 	    planet_x = planet_x - 23*dt  --Færa plánetuna svo það lýti eins og öndin fari inn í hana
-		planet_y = planet_y - 20*dt
+		planet_y = planet_y - 20*dt  --ATH ORIGINAL HRAÐI ER X-ÁS = 23 OG Y-ÁS = 20
 	
 	end
 end
 	
 function planetteikna()
 
-    if timer > 100 then  --Hér stilli ég hvenær plánetan kemur og allt það byrjar.
+    if timer > 1 then  --Hér stilli ég hvenær plánetan kemur og allt það byrjar.
 	    love.graphics.draw(planetan, planet_x, planet_y)  --Hér teikna ég svo canvasinn, en það er ekki kröfuhörð aðgerð þar sem að allt hefur verið reiknað í planethlada(), ef ég setti functionið bara beint hérna inn í love.draw þá væri hann alltaf að reikna endalaust = mikið lagg
 		planet_move = true
 	end
 	
-	if utmork_planetu > 2700 and utmork_planetu < 2850 then
-	    love.graphics.print("GRAVITY!", 200, 200)
+	if utmork_planetu > 2700 and utmork_planetu < 2850 then  --Varnarorð um að þyngdarafl er að fara taka við.
+	    love.graphics.setColor(167, 120, 115)
+		love.graphics.setFont(font2)
+	    love.graphics.rectangle("fill", 195, 195, 100, 40)  
+		love.graphics.setColor(255, 255, 255, 255)
+		love.graphics.print("Gravity!", 200, 200)
+		love.graphics.setFont(font2)
 	end
 
 end	

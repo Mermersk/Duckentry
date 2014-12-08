@@ -1,23 +1,28 @@
 --Pause thingy
 
 function flipihlada()
-    flipi = love.graphics.newImage("flipi.png")
-	kassi = love.graphics.newImage("kassi.png")
-	flipi_x = 200    
-	flipi_y = 240
+    flipi = love.graphics.newImage("Resources/flipi.png")
+	kassi = love.graphics.newImage("Resources/kassi.png")
+	flipi_x = 200 
+	flipi_y = 250 
 	paused_text = "Start"
 	paused = true
 
 	onoff = 0
 	reset_takki = 1
 	
-	lif = love.graphics.newImage("lif.png")
+	lif = love.graphics.newImage("Resources/lif.png")
 	lifteljari = 0
+	about_draw = false
+	
+	credit_teljari = 1
 	
 end
 
 function flipiaction()
     
+	
+	
 	if lifteljari < 0.5 then
 	    love.graphics.draw(lif, 380, 5, 0, 0.3, 0.3)  --lif nr 1
 	else
@@ -42,7 +47,7 @@ function flipiaction()
 		love.graphics.setColor(255, 255, 255, 255)	
 	end
 	
-	if lifteljari == 3 and love.mouse.isDown("l") and mx > 180 and mx < 300 and my > 100 and my < 160 then --Resetta functionið, hér byrjar leikurinn uppá nýtt
+	if lifteljari == 3 and love.mouse.isDown("l") and mx > 180 * scale_x and mx < 300 * scale_x and my > 100 and my < 160 then --Resetta functionið, hér byrjar leikurinn uppá nýtt
 	    --GAME OVER SCHUUUULBOY, BYRJA UPPÁ NÝTT
 	    resetgame()
 	end
@@ -86,13 +91,7 @@ function flipiaction()
 	    paused = false
 		paused_text = "Menu"
 	end
-	
-	if paused == false and flipi_y > 9.5 then
-	    flipi_y = flipi_y - 15
-    end
-    if paused == true and flipi_y < 250 then
-	    flipi_y = flipi_y + 15
-    end
+
 
     if reset_takki % 2 == 0 then
         paused = true
@@ -138,40 +137,21 @@ function flipiaction()
 	  
 	end	
 	
+	if credit_teljari % 2 == 0 then
+	    love.graphics.draw(credit_canvas, 25)
+	end
 
 	
 end
 
 function resetgame()  --functionið sem að Restartar leiknum svo að spilandi getur byrjað alveg uppá nýtt.
-
-    aster = {
-	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 1570, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 1650, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
-	}
-	asteroid_scale_x = 0.1
-	asteroid_scale_y = 0.1
 	
-	aster2 = {
-	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 1550, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
-	{ast_x = 1650, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0}
-	}
-	
-	nebulas = {
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 775), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 800), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 30), rammi_scale = love.math.random(5, 12)/10},
-	{nebulat = nebula(love.math.random(14, 28)), rammi_x = love.math.random(550, 750), rammi_y = love.math.random(-250, 175), rammi_speed = love.math.random(15, 37), rammi_scale = love.math.random(5, 12)/10}
-	}
-	
-	    gul:reset()
-		
+	  
 		ond_x = 75
         ond_y = 150
 	    ond_rot = 3.14
 	    ond_speed = 20
+	    hond:seek(1)
 	
 		timer = 0
 		flipihlada()
@@ -181,15 +161,21 @@ function resetgame()  --functionið sem að Restartar leiknum svo að spilandi g
 		snu = 0
 	    snu2 = 0
 		
-		planet_move = false
-	    planet_x = 3700
-	    planet_y = 3000
-		
 		lifteljari = 0
 		--hugs(10, 10, hugs1) 
-	    hugs(25, 10, hugs2)
-	    hugs(45, 10, hugs3)
+	    hugs(30, 10, hugs2)
+	    hugs(70, 10, hugs3)
+		hugs(95, 10, hugs4)
+		asteroidshlada()
+		nebulahlada()
         planethlada()
+	    skysoundshlada()
+		vatnload()
+		treload()
+		endload()
+		particlehlada()
+		
+		love.audio.stop()
 
 end
 

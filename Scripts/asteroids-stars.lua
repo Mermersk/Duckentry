@@ -6,7 +6,7 @@
 --end
 function asteroidshlada()
 
-    asteroid = love.graphics.newImage("ast.png")
+    asteroid = love.graphics.newImage("Resources/ast.png")
 	aster = {
 	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
 	{ast_x = 1570, ast_y = love.math.random(5, 320), ast_speed = love.math.random(25, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
@@ -17,7 +17,7 @@ function asteroidshlada()
 	asteroid_scale_y = 0.1
 	
 	
-	asteroid2 = love.graphics.newImage("ast2.png")
+	asteroid2 = love.graphics.newImage("Resources/ast2.png")
 	aster2 = {
 	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
 	{ast_x = 1600, ast_y = love.math.random(5, 320), ast_speed = love.math.random(70, 170), ast_snu = love.math.random(1, 20)/10, ast_start = 0},
@@ -92,11 +92,13 @@ function asteroidsdraw()
 
     for lykill, gildi in pairs(aster) do
 	    love.graphics.draw(asteroid, gildi.ast_x, gildi.ast_y, gildi.ast_start, asteroid_scale_x, asteroid_scale_y, 150, 150)
-		love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
+		--love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
+		--love.graphics.line(ond_x, ond_y, gildi.ast_x, gildi.ast_y)  --Skemmtilegar linur!
 	end
 	for lykill, gildi in pairs(aster2) do
 	    love.graphics.draw(asteroid2, gildi.ast_x, gildi.ast_y, gildi.ast_start, asteroid_scale_x, asteroid_scale_y, 150, 150)
-		love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
+		--love.graphics.circle("fill", gildi.ast_x, gildi.ast_y, asteroid:getHeight()*0.025, 16)  --Nákvæmlega sömu tölur og í collision formúlunni, hring með dama radius þá get ég séð árekstarsvæðin!
+	    --love.graphics.line(ond_x, ond_y, gildi.ast_x, gildi.ast_y)
 	end
 	
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -124,6 +126,18 @@ function things_that_must_run_independent_from_state_of_boolean_reset(dt)
     end
 
 	utmork_planetu = math.sqrt(((planet_x + 2500) - ond_x) * ((planet_x + 2500) - ond_x) + ((planet_y + 2500) - ond_y) * ((planet_y + 2500) - ond_y))
+	
+	if paused == false and flipi_y > 9.5 and reset_takki % 2 == 1 then  ---Fyrir Menu til að fara upp og niður. Reset_takkin er þarna svo að  menuið fari ekki niður þegar öndin missir líf.
+	    flipi_y = flipi_y - 400*dt
+    end
+    if paused == true and flipi_y < 250 and reset_takki % 2 == 1 then
+	    flipi_y = flipi_y + 400*dt
+    end
+	
+	if ond_x == punktar[8].x then
+	    hjortu = hjortu + (1/3)*dt
+	end
+	
 end
 
 

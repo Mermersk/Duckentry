@@ -2,10 +2,11 @@
 
 function hugshlada()
 
-    hugs1 = love.graphics.newImage("hugs1.png")
-	hugs2 = love.graphics.newImage("hugs2.png")
-	hugs3 = love.graphics.newImage("hugs3.png")
-    quack1 = love.audio.newSource("duck1.ogg")
+    hugs1 = love.graphics.newImage("Resources/hugs1.png")
+	hugs2 = love.graphics.newImage("Resources/hugs2.png")
+	hugs3 = love.graphics.newImage("Resources/hugs3.png")
+	hugs4 = love.graphics.newImage("Resources/hugs4.png")
+    quack1 = love.audio.newSource("Resources/duck1.ogg")
 	quack1:setLooping(false)
 	
 	alpha = 0
@@ -24,6 +25,7 @@ function hugsdraw()
 	--hugs(10, 10, hugs1) --functionið sem tekur við upplýsingum!
 	hugs(30, 10, hugs2)
 	hugs(70, 10, hugs3)
+	hugs(95, 10, hugs4)
 end
 
 function hugs(start, hvelengi, mynd) --function til að auðvelda teikningu hugsanna, hvenær í leiknum það á að gerast
