@@ -64,6 +64,12 @@ end
 
 function vatndraw()
 
+	love.graphics.draw(vatn, vatn_x, vatn_y)
+	
+end
+
+function canvasdrawvatn()
+
     love.graphics.setCanvas(vatn)
     love.graphics.setColor(47, 79, 150)
 	for i = 1, 19 do
@@ -94,10 +100,5 @@ function vatndraw()
 	love.graphics.draw(fondung, punktar[13].x, punktar[13].y, 0, 0.1, 0.1, 400/2, 270/2)
 	love.graphics.draw(fondung, punktar[14].x, punktar[14].y, 0, 0.1, 0.1, 400/2, 270/2)
 	love.graphics.setCanvas()
-	--love.graphics.print(punktar[19].y)
-	love.graphics.draw(vatn, vatn_x, vatn_y)
-
-	
-	
-
+    
 end

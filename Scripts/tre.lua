@@ -9,20 +9,20 @@ function treload()
 	    trefjoldi[i] = {tre_x = love.math.random(-2, 600), tre_y = love.math.random(100, 300), tre_scale = love.math.random(30, 55)/100}
 	end
 	
-	skog_x = 0
-	skog_y = 500
+	skog_x = 0 --original = 0
+	skog_y = 400 --original = 500 
 	tretimer = 0
 	
 	skog = love.graphics.newCanvas(600, 300)  --Búa til canvas þar sem að skógurinn verður teiknaður á.
-	 
+	
 end
 
 function treupdate(dt)
     tretimer = tretimer + 1*dt
     for lykill, gildi in pairs(trefjoldi) do
-	      if tretimer < vatnstart  then
-	          gildi.tre_x = gildi.tre_x - 40*dt
-		  end
+	    if tretimer < vatnstart  then
+	        gildi.tre_x = gildi.tre_x - 40*dt
+		end
 		
 		if gildi.tre_x < -170 and tretimer < vatnstart - 3  then --Svo að vatnið geti komið, -3 svo að við sjáum aldrei bara hálft tré.
 		    gildi.tre_x = love.math.random(520, 600)
@@ -38,7 +38,7 @@ function treupdate(dt)
 	
     skog:clear() -- Þetta er notað til að hreinsa allt sem er ekki beint i draw á canvas. með þessu er hægt að hafa newCanvas bara í load! Ef þetta væri ekki þá myndi tréið skilja eftir sig græna slóð þegar það hreyfist.
 	
-	if utmork_planetu < 800 and skog_y > 40 then
+	if utmork_planetu < 800 and skog_y > 40 then  --lætur skóginn risa upp
 	    skog_y = skog_y - 9*dt
 	end
 	
@@ -57,20 +57,18 @@ end
 
 function tredraw()
 
-    
-	love.graphics.setCanvas(skog)
+    love.graphics.draw(skog, skog_x, skog_y)
+	
+end
+
+function canvasdrawtre()
+
+    love.graphics.setCanvas(skog)
 	for lykill, gildi in pairs(trefjoldi) do
 	    love.graphics.draw(tre, gildi.tre_x, gildi.tre_y, 0, gildi.tre_scale, gildi.tre_scale)
 	end
 	love.graphics.setCanvas()
-   
-    love.graphics.draw(skog, skog_x, skog_y)
-    
-	if tretimer > 5 and skog_y < 55 then
-	   -- love.graphics.print(skogr, 10, 200)
-	    --love.graphics.print(skogg, 40, 200)
-	    --love.graphics.print(skogb, 70, 200)
-	    --love.graphics.print(skoga, 100, 200)
-	end
     
 end
+
+

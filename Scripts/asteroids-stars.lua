@@ -39,7 +39,7 @@ function asteroidsupdate(dt)
 	    gildi.ast_x = gildi.ast_x - gildi.ast_speed*dt
 		if gildi.ast_x < -100 then
 		    gildi.ast_x = love.math.random(500, 675)
-			gildi.ast_y = love.math.random(5, 320)
+			gildi.ast_y = love.math.random(20, 320)
 			gildi.ast_speed = love.math.random(25, 140)
 		end
 

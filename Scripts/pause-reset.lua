@@ -47,7 +47,7 @@ function flipiaction()
 		love.graphics.setColor(255, 255, 255, 255)	
 	end
 	
-	if lifteljari == 3 and love.mouse.isDown("l") and mx > 180 * scale_x and mx < 300 * scale_x and my > 100 and my < 160 then --Resetta functionið, hér byrjar leikurinn uppá nýtt
+	if lifteljari == 3 and love.mouse.isDown("l") and mx > 180 and mx < 300 and my > 100 and my < 160 then --Resetta functionið, hér byrjar leikurinn uppá nýtt
 	    --GAME OVER SCHUUUULBOY, BYRJA UPPÁ NÝTT
 	    resetgame()
 	end

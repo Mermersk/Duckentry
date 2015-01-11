@@ -13,17 +13,14 @@ require("Scripts.tre")
 require("Scripts.vatn")
 require("Scripts.end")
 
---love.graphics.scale(2, 2)
-
 function love.load()
-	
-	g_width, g_height = love.window.getDimensions()
+	love.window.setFullscreen(false)
+	window_width, window_height = love.window.getDimensions()
 	game_width = 480
 	game_height = 320
-	
-	love.graphics.scale(g_width/game_width, g_height/game_height)
-	scale_x = g_width/game_width
-	scale_y = g_height/game_height
+
+	scale_x = window_width/game_width
+	scale_y = window_height/game_height
 	
     font = love.graphics.newFont("Resources/Dimbo Regular.ttf", 18) --Venjulegi
     font2 = love.graphics.newFont("Resources/Dimbo Regular.ttf", 30) --Stærri fonturinn
@@ -63,8 +60,8 @@ end
 
 function love.update(dt)
    
-	love.graphics.scale(g_width/game_width, g_height/game_height)
 	mx, my = love.mouse.getPosition()
+	 
     maxi = love.graphics.getMaxImageSize()  --hæsta width/height sem mynd eða canvas má vera á tilteknu tæki
     things_that_must_run_independent_from_state_of_boolean_reset(dt)  --located in asteroids-stars.lua
 	
@@ -77,7 +74,6 @@ function love.update(dt)
 	    return
 	end
 	
-	love.graphics.scale(g_width/game_width, g_height/game_height)
 	particleupdate(dt)
 	opening_action(dt)
 	skysoundsupdate(dt)
@@ -155,7 +151,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.scale(g_width/game_width, g_height/game_height)
+    --love.graphics.scale(g_width/game_width, g_height/game_height)
 	
 	love.graphics.setFont(font)
     --love.graphics.print(kerfi)
@@ -188,8 +184,10 @@ function love.draw()
 	flipiaction()
 	
 	--love.graphics.print(hjortu, 5, 100)
-	love.graphics.print(flipi_y + 35 * scale_y)
-	love.graphics.print(my, 1, 100)
+	--love.graphics.print(flipi_y + 35 * scale_y)
+	--love.graphics.print(utmork_planetu, 1, 50)
+	--love.graphics.print(skog_y, 1, 100)
+	
 	
 end
 
@@ -197,7 +195,7 @@ function love.mousepressed(x, y, button)
     --love.graphics.scale(g_width/game_width, g_height/game_height)
     --love.graphics.scale(2, 2)
 
-	if button == "l" and x > 200 * scale_x and x < 325 * scale_x and y < flipi_y + 35 * scale_y and y > flipi_y - 10 * scale_y then  --Resume/Menu takkinn
+	if button == "l" and x > 200 and x < 325 and y < flipi_y + 35 and y > flipi_y - 10 then  --Resume/Menu takkinn
 	    onoff = onoff + 1
 		if credit_teljari % 2 == 0 then  --Aðeins hækkar talan ef credit_screenið er opið
 		    credit_teljari = credit_teljari + 1
@@ -240,5 +238,51 @@ function credit()
 
 
 end
+
+--monkeypatch starts here
+local love_draw = love.draw --store original draw callback
+love.draw = function() --overwrite draw callback
+	local width,height = love.window.getDimensions()
+	local original_width = 480
+	local original_height = 320
+	local sx,sy = width/original_width,height/original_height
+	
+	--coordinate system transformation functions only affect love.graphics drawing calls
+	love.graphics.push() --store current coordinate transformation
+	canvasdrawtre() --Hér teikna ég allt á canvasið, trein, svo hér fyrir neðan scaleast functionið tredraw() en það teiknar bara canvasið itself. Scalar þá bara vanvasið en ekki það sem er í canvasinu lika! Gallin áður var að það "scaleaði" trein og svo canvasið semsagt 2! sem gengur ekki.
+	canvasdrawvatn()
+	
+	love.graphics.scale(sx,sy) --scale coordinate system
+	love_draw() --call original draw callback
+	love.graphics.pop() --restore current coordinate transformation
+end
+
+
+
+local love_mousepressed = love.mousepressed --store original mousepressed callback
+love.mousepressed = function(x,y,button) --overwrite mousepressed callback
+	local width,height = love.window.getDimensions()
+	local original_width = 480
+	local original_height = 320
+	local sx,sy = width/original_width,height/original_height
+	love_mousepressed(x/sx,y/sy,button) --call original mousepressed callback with scaled coordinates
+end
+
+local mouse_getPosition = love.mouse.getPosition
+    love.mouse.getPosition = function()
+    local width, height = love.window.getDimensions()
+	local original_width = 480
+	local original_height = 320
+	local sx, sy = width/original_width, height/original_height
+	x, y = mouse_getPosition()
+	x = x/sx
+	y = y/sy
+	return x, y
+end
+
+	
+	
+	
+--monkeypatch ends here 
 
 

@@ -6,7 +6,7 @@ function planethlada()
 	--planet_y = 3000
 	planet(30, 125, 80, 2.667) --Hér hleð ég inn plánetuna í load svo að allt laggi ekki.
 	planet_x = 2000  --stærri stala hér = lengri timi til að plánetan komi
-	planet_y = 2000  --  sama og uppi
+	planet_y = 2000  --  sama og uppi  --2000 rétta
 end
 
 function planetupdate(dt)
